@@ -13,6 +13,7 @@ const Counter = ({ counter, onUpdate, deleteCounter }) => {
 	const { count, name, isEditing } = counter;
 	return (
 		<div
+			data-testid="counter"
 			style={{
 				display: 'flex',
 				flexDirection: 'column',
@@ -22,6 +23,7 @@ const Counter = ({ counter, onUpdate, deleteCounter }) => {
 			{isEditing ? (
 				<div style={{ display: 'flex', gap: '0.5rem' }}>
 					<Input
+						data-testid="counterNameInput"
 						type="text"
 						value={name}
 						onChange={(event) =>
@@ -39,16 +41,19 @@ const Counter = ({ counter, onUpdate, deleteCounter }) => {
 			)}
 			<div style={{ display: 'flex', paddingTop: '0.5rem' }}>
 				<Button
+					data-testid="incCounter"
 					icon={<PlusOutlined />}
 					onClick={() => onUpdate({ ...counter, count: count + 1 })}
 				/>
 				<Button
+					data-testid="decCounter"
 					icon={<MinusOutlined />}
 					onClick={() => onUpdate({ ...counter, count: count - 1 })}
 				/>
 			</div>
 			<div style={{ display: 'flex', paddingTop: '0.5rem' }}>
 				<Button
+					data-testid="toggleEditCounter"
 					icon={isEditing ? <SaveOutlined /> : <EditOutlined />}
 					onClick={() =>
 						onUpdate({ ...counter, isEditing: !isEditing })
@@ -56,7 +61,11 @@ const Counter = ({ counter, onUpdate, deleteCounter }) => {
 				>
 					{isEditing ? 'Save' : 'Edit'}
 				</Button>
-				<Button icon={<DeleteOutlined />} onClick={deleteCounter} />
+				<Button
+					data-testid="deleteCounter"
+					icon={<DeleteOutlined />}
+					onClick={deleteCounter}
+				/>
 			</div>
 		</div>
 	);

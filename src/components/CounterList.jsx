@@ -48,7 +48,11 @@ export default function CounterList() {
 
 	return (
 		<div style={{ marginTop: '1rem' }}>
-			<Button style={{ marginLeft: '1rem' }} onClick={addCounter}>
+			<Button
+				data-testid="addCounter"
+				style={{ marginLeft: '1rem' }}
+				onClick={addCounter}
+			>
 				Add counter
 			</Button>
 			{counters?.map((counter) => (
