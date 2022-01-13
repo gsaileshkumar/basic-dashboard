@@ -9,14 +9,14 @@ import { employeeCard, employeeList } from './style';
 const { TabPane } = Tabs;
 const { Title, Text } = Typography;
 
-const ATTRITION = {
+const REHIRE = {
 	ELIGIBLE: true,
 	INELIGIBLE: false,
 	UNKNOWN: null,
 };
 
 const DashboardView = () => {
-	const [attritionType, setAttritionType] = useState('ELIGIBLE');
+	const [rehireType, setRehireType] = useState('ELIGIBLE');
 	const [employees, setEmployees] = useState([]);
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -33,18 +33,18 @@ const DashboardView = () => {
 	};
 
 	const onChangeHandler = (key) => {
-		setAttritionType(key);
+		setRehireType(key);
 	};
 
 	useEffect(() => {
 		const fetchEmployees = async () => {
-			const response = await getEmployees(ATTRITION[attritionType]);
+			const response = await getEmployees(REHIRE[rehireType]);
 			setEmployees(response);
 		};
 		fetchEmployees();
-	}, [attritionType]);
+	}, [rehireType]);
 
-	const constructEmployeesList = () => {
+	const constructAttritionTimeline = () => {
 		const _employees = employees.sort(
 			(a, b) =>
 				new Date(b.terminated_date).getTime() -
@@ -67,7 +67,7 @@ const DashboardView = () => {
 								onClick={() => showModal(employee)}
 							>
 								<VoluntaryIndicator
-									attritionType={attritionType}
+									rehireType={rehireType}
 									voluntary={employee?.voluntary}
 								/>
 								<Text>{employee.name}</Text>
@@ -83,13 +83,13 @@ const DashboardView = () => {
 			<Title level={1}>DASHBOARD</Title>
 			<Tabs defaultActiveKey="ELIGIBLE" onChange={onChangeHandler}>
 				<TabPane tab="Rehire Eligible" key="ELIGIBLE">
-					{constructEmployeesList()}
+					{constructAttritionTimeline()}
 				</TabPane>
 				<TabPane tab="Rehire Ineligible" key="INELIGIBLE">
-					{constructEmployeesList()}
+					{constructAttritionTimeline()}
 				</TabPane>
 				<TabPane tab="Rehire Unknown" key="UNKNOWN">
-					{constructEmployeesList()}
+					{constructAttritionTimeline()}
 				</TabPane>
 			</Tabs>
 			{selectedEmployee && (
@@ -101,7 +101,7 @@ const DashboardView = () => {
 					bodyStyle={{ height: '250px' }}
 				>
 					<SelectedEmployee
-						attritionType={attritionType}
+						rehireType={rehireType}
 						selectedEmployee={selectedEmployee}
 					/>
 				</Modal>

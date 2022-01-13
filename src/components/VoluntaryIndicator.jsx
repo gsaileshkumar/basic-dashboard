@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VoluntaryIndicator = ({ attritionType, voluntary }) => {
+const VoluntaryIndicator = ({ rehireType, voluntary }) => {
 	return (
 		<div
 			style={{
@@ -8,7 +8,7 @@ const VoluntaryIndicator = ({ attritionType, voluntary }) => {
 				width: '2rem',
 				marginRight: '0.5rem',
 				backgroundColor:
-					attritionType === 'ELIGIBLE'
+					rehireType === 'ELIGIBLE'
 						? voluntary
 							? 'green'
 							: 'red'

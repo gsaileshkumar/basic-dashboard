@@ -17,12 +17,12 @@ const selectedEmployeeOverview = {
 	paddingBottom: '0.5rem',
 };
 
-const SelectedEmployee = ({ attritionType, selectedEmployee }) => {
+const SelectedEmployee = ({ rehireType, selectedEmployee }) => {
 	return (
 		<div key={selectedEmployee?.id} style={selectedEmployeeSection}>
 			<div style={selectedEmployeeOverview}>
 				<VoluntaryIndicator
-					attritionType={attritionType}
+					rehireType={rehireType}
 					voluntary={selectedEmployee?.voluntary}
 				/>
 				<Text>{selectedEmployee?.name}</Text>
